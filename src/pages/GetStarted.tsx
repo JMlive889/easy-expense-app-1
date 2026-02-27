@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Eye, EyeOff, ArrowRight, CheckCircle } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Eye, EyeOff, ArrowRight, CheckCircle, LayoutDashboard } from 'lucide-react';
 import Navigation from '../components/landing/Navigation';
 import Footer from '../components/landing/Footer';
 import { supabase } from '../lib/supabase';
+import { useAuth } from '../contexts/AuthContext';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type NavigateFn = (page: string, chatId?: string, licenseData?: any, scrollTarget?: string) => void;
 
@@ -142,6 +143,7 @@ function AppleIcon() {
 }
 
 export default function GetStarted({ onNavigate }: GetStartedProps) {
+  const { user, profile } = useAuth();
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('darkMode');
     return saved !== null ? JSON.parse(saved) : true;
@@ -247,13 +249,35 @@ export default function GetStarted({ onNavigate }: GetStartedProps) {
             </div>
 
             <div className="flex flex-col justify-center">
+              {user && profile && (
+                <div className={`rounded-xl border px-5 py-4 mb-5 flex items-center justify-between gap-4 ${
+                  darkMode
+                    ? 'bg-teal-heart/10 border-teal-heart/30'
+                    : 'bg-teal-heart/10 border-teal-heart/30'
+                }`}>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-teal-heart">Already signed in</p>
+                    <p className="text-sm dark:text-gray-400 text-gray-600 truncate mt-0.5">{user.email}</p>
+                  </div>
+                  <button
+                    onClick={() => onNavigate?.('dashboard')}
+                    className="flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-lg bg-teal-heart text-bg-black font-semibold text-sm hover:shadow-lg hover:shadow-teal-heart/30 transition-all duration-200"
+                  >
+                    <LayoutDashboard className="w-4 h-4" />
+                    <span>Go to Dashboard</span>
+                  </button>
+                </div>
+              )}
+
               <div className={`rounded-2xl border p-8 shadow-xl ${
                 darkMode
                   ? 'bg-secondary-dark border-teal-heart/20'
                   : 'bg-gray-50 border-gray-200'
               }`}>
                 <h2 className="text-2xl font-bold dark:text-white text-gray-900 mb-1">Create your free account</h2>
-                <p className="dark:text-gray-400 text-gray-600 mb-6 text-sm">No credit card required. 7-day free trial.</p>
+                <p className="dark:text-gray-400 text-gray-600 mb-6 text-sm">
+                  {user ? 'Sign up with a different email to create a second account.' : 'No credit card required. 7-day free trial.'}
+                </p>
 
                 <div className="space-y-3 mb-6">
                   <button

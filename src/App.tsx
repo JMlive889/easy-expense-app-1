@@ -101,7 +101,7 @@ function App() {
         setCurrentPage('landing')
       } else if (!isAuthenticated && authRequiredPages.includes(currentPage)) {
         setCurrentPage('landing')
-      } else if (isAuthenticated && ['login', 'signup', 'get-started'].includes(currentPage)) {
+      } else if (isAuthenticated && ['login', 'signup'].includes(currentPage)) {
         setCurrentPage('dashboard')
       }
       return
@@ -109,7 +109,7 @@ function App() {
 
     if (!isAuthenticated && !publicPages.includes(currentPage) && !authRequiredPages.includes(currentPage)) {
       setCurrentPage('landing')
-    } else if (isAuthenticated && ['login', 'signup', 'get-started'].includes(currentPage)) {
+    } else if (isAuthenticated && ['login', 'signup'].includes(currentPage)) {
       setCurrentPage('dashboard')
     }
   }, [user, profile, loading, currentPage])
