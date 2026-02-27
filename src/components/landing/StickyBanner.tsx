@@ -3,9 +3,10 @@ import { ArrowRight, Eye } from 'lucide-react';
 
 interface StickyBannerProps {
   darkMode: boolean;
+  onNavigate?: (page: string) => void;
 }
 
-export default function StickyBanner({ darkMode }: StickyBannerProps) {
+export default function StickyBanner({ darkMode, onNavigate }: StickyBannerProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -101,7 +102,7 @@ export default function StickyBanner({ darkMode }: StickyBannerProps) {
               </button>
 
               <button
-                onClick={() => scrollToSection('cta')}
+                onClick={() => onNavigate?.('get-started')}
                 className="
                   flex items-center gap-2 px-4 sm:px-6 py-2 rounded-lg
                   bg-teal-heart text-bg-black font-semibold

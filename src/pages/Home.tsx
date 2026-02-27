@@ -57,9 +57,9 @@ export default function Home({ onNavigate, scrollTarget }: HomeProps) {
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-bg-black text-white' : 'bg-white text-gray-900'}`}>
       <Navigation darkMode={darkMode} toggleDarkMode={toggleDarkMode} onNavigate={onNavigate} />
-      <StickyBanner darkMode={darkMode} />
+      <StickyBanner darkMode={darkMode} onNavigate={onNavigate} />
       <div id="home">
-        <Hero />
+        <Hero onNavigate={onNavigate} />
       </div>
       <VideoHero />
       <ThreeMainFunctions />
@@ -71,7 +71,7 @@ export default function Home({ onNavigate, scrollTarget }: HomeProps) {
       <ComingSoon />
       <SocialProof />
       <div id="pricing">
-        <PricingSection />
+        <PricingSection onNavigate={onNavigate} />
       </div>
       <div id="support">
         <CTASection />

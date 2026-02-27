@@ -1,13 +1,10 @@
 import { Check } from 'lucide-react';
 
-export default function PricingSection() {
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+interface PricingSectionProps {
+  onNavigate?: (page: string) => void;
+}
 
+export default function PricingSection({ onNavigate }: PricingSectionProps) {
   const features = [
     {
       name: 'Core Expense Tracking',
@@ -110,7 +107,7 @@ export default function PricingSection() {
               </div>
 
               <button
-                onClick={() => scrollToSection('cta')}
+                onClick={() => onNavigate?.('get-started')}
                 className="w-full mt-8 px-8 py-4 rounded-lg bg-teal-heart/10 border-2 border-teal-heart text-teal-heart font-bold text-lg hover:bg-teal-heart hover:text-bg-black transition-all"
               >
                 Get Started
@@ -149,7 +146,7 @@ export default function PricingSection() {
               </div>
 
               <button
-                onClick={() => scrollToSection('cta')}
+                onClick={() => onNavigate?.('get-started')}
                 className="w-full mt-8 px-8 py-4 rounded-lg bg-teal-heart text-bg-black font-bold text-lg hover:shadow-2xl hover:shadow-teal-heart/50 transition-all"
               >
                 Get Started

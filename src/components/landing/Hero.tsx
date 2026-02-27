@@ -1,13 +1,10 @@
 import { ArrowRight } from 'lucide-react';
 
-export default function Hero() {
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+interface HeroProps {
+  onNavigate?: (page: string) => void;
+}
 
+export default function Hero({ onNavigate }: HeroProps) {
   return (
     <section
       id="home"
@@ -37,7 +34,7 @@ export default function Hero() {
             </p>
 
             <button
-              onClick={() => scrollToSection('cta')}
+              onClick={() => onNavigate?.('get-started')}
               className="group px-8 py-4 rounded-lg bg-teal-heart text-bg-black font-semibold text-lg hover:shadow-2xl hover:shadow-teal-heart/50 transition-all flex items-center space-x-2"
             >
               <span>Start Free Trial</span>

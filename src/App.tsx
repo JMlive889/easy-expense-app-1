@@ -26,11 +26,12 @@ import { BatchView } from './pages/BatchView'
 import { LicenseDetails } from './pages/LicenseDetails'
 import Home from './pages/Home'
 import VideoTutorials from './pages/VideoTutorials'
+import GetStarted from './pages/GetStarted'
 import { MainLayout } from './components/layout/MainLayout'
 import { useAuth } from './contexts/AuthContext'
 import { License, OwnerInfo } from './hooks/useLicenses'
 
-export type PageType = 'landing' | 'dashboard' | 'settings' | 'edit-profile' | 'edit-entity' | 'edit-notifications' | 'pricing' | 'login' | 'signup' | 'success' | 'reset-password' | 'forgot-password' | 'licenses' | 'license-details' | 'accept-invitation' | 'add-accountant' | 'other-settings' | 'documents' | 'receipts' | 'chats' | 'messages' | 'todos' | 'entities' | 'bookmarks' | 'reports' | 'batch-view' | 'video-tutorials'
+export type PageType = 'landing' | 'dashboard' | 'settings' | 'edit-profile' | 'edit-entity' | 'edit-notifications' | 'pricing' | 'login' | 'signup' | 'get-started' | 'success' | 'reset-password' | 'forgot-password' | 'licenses' | 'license-details' | 'accept-invitation' | 'add-accountant' | 'other-settings' | 'documents' | 'receipts' | 'chats' | 'messages' | 'todos' | 'entities' | 'bookmarks' | 'reports' | 'batch-view' | 'video-tutorials'
 export type LandingSection = 'home' | 'features' | 'pricing' | 'support'
 
 function App() {
@@ -90,7 +91,7 @@ function App() {
   useEffect(() => {
     if (loading) return
 
-    const publicPages: PageType[] = ['landing', 'login', 'signup', 'reset-password', 'forgot-password', 'accept-invitation', 'video-tutorials']
+    const publicPages: PageType[] = ['landing', 'login', 'signup', 'get-started', 'reset-password', 'forgot-password', 'accept-invitation', 'video-tutorials']
     const authRequiredPages: PageType[] = ['success', 'pricing']
     const isAuthenticated = user && profile
 
@@ -100,7 +101,7 @@ function App() {
         setCurrentPage('landing')
       } else if (!isAuthenticated && authRequiredPages.includes(currentPage)) {
         setCurrentPage('landing')
-      } else if (isAuthenticated && ['login', 'signup'].includes(currentPage)) {
+      } else if (isAuthenticated && ['login', 'signup', 'get-started'].includes(currentPage)) {
         setCurrentPage('dashboard')
       }
       return
@@ -108,7 +109,7 @@ function App() {
 
     if (!isAuthenticated && !publicPages.includes(currentPage) && !authRequiredPages.includes(currentPage)) {
       setCurrentPage('landing')
-    } else if (isAuthenticated && ['login', 'signup'].includes(currentPage)) {
+    } else if (isAuthenticated && ['login', 'signup', 'get-started'].includes(currentPage)) {
       setCurrentPage('dashboard')
     }
   }, [user, profile, loading, currentPage])
@@ -149,7 +150,7 @@ function App() {
   }
 
   const renderPage = () => {
-    const publicPages: PageType[] = ['landing', 'login', 'signup', 'reset-password', 'forgot-password', 'accept-invitation', 'video-tutorials']
+    const publicPages: PageType[] = ['landing', 'login', 'signup', 'get-started', 'reset-password', 'forgot-password', 'accept-invitation', 'video-tutorials']
     const shouldUseLayout = user && profile && !publicPages.includes(currentPage)
 
     const pageContent = (() => {
@@ -216,6 +217,8 @@ function App() {
           return <Login onNavigate={handleNavigate} />
         case 'signup':
           return <Signup onNavigate={handleNavigate} />
+        case 'get-started':
+          return <GetStarted onNavigate={handleNavigate} />
         case 'reset-password':
           return <ResetPassword />
         case 'forgot-password':
