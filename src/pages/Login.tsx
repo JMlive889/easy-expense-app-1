@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader } from '../components/ui/Card'
 import { PageType } from '../App'
 import { Info, AlertCircle, Loader2 } from 'lucide-react'
 import { useInvitation } from '../hooks/useInvitation'
+import Footer from '../components/landing/Footer'
 
 interface LoginProps {
   onNavigate: (page: PageType) => void
@@ -14,8 +15,21 @@ export function Login({ onNavigate }: LoginProps) {
   const [ownerName, setOwnerName] = useState<string | undefined>(undefined)
   const [inviteToken, setInviteToken] = useState<string | undefined>(undefined)
   const [initialEmail, setInitialEmail] = useState<string | undefined>(undefined)
+  const [darkMode, setDarkMode] = useState(false)
 
   const { invitation, loading: invitationLoading, error: invitationError } = useInvitation(inviteToken || null)
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme')
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isDark = savedTheme === 'dark' || (!savedTheme && prefersDark)
+    setDarkMode(isDark)
+    if (isDark) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }, [])
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -45,12 +59,17 @@ export function Login({ onNavigate }: LoginProps) {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-950 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div className="text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 mb-6 shadow-xl">
-            <span className="text-3xl font-bold text-white">EZ</span>
-          </div>
+    <div className="min-h-screen flex flex-col bg-white dark:bg-gray-950">
+      <div className="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full space-y-8">
+          <div className="text-center">
+            <div className="flex justify-center mb-6">
+              <img
+                src={darkMode ? "/EZ_Logo_-_White.png" : "/EZ_Logo_-_Black.png"}
+                alt="Easy Expense App Logo"
+                className="w-20 h-20 object-contain"
+              />
+            </div>
           <h2 className="mt-6 text-3xl font-extrabold text-slate-900 dark:text-white">
             {ownerName && entityName ? (
               <>Sign in to join {ownerName}'s {entityName} workspace</>
@@ -135,7 +154,9 @@ export function Login({ onNavigate }: LoginProps) {
             <LoginForm onSuccess={handleSuccess} onNavigate={onNavigate} />
           </CardContent>
         </Card>
+        </div>
       </div>
+      <Footer onNavigate={onNavigate} darkMode={darkMode} />
     </div>
   )
 }
