@@ -2,7 +2,7 @@ import { Twitter, Linkedin, Github } from 'lucide-react';
 import { useState } from 'react';
 
 interface FooterProps {
-  onNavigate?: (page: 'landing') => void;
+  onNavigate?: (page: string) => void;
   darkMode?: boolean;
 }
 
@@ -19,7 +19,12 @@ export default function Footer({ onNavigate, darkMode }: FooterProps) {
     }, 3000);
   };
 
-  const scrollToSection = (id: string) => {
+  const handleMenuClick = (id: string) => {
+    if (id === 'video-tutorials' && onNavigate) {
+      onNavigate('video-tutorials');
+      return;
+    }
+
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -74,7 +79,7 @@ export default function Footer({ onNavigate, darkMode }: FooterProps) {
             <ul className="space-y-3">
               <li>
                 <button
-                  onClick={() => scrollToSection('features')}
+                  onClick={() => handleMenuClick('features')}
                   className="dark:text-gray-400 text-gray-900 hover:text-teal-heart transition-colors"
                 >
                   Features
@@ -82,7 +87,7 @@ export default function Footer({ onNavigate, darkMode }: FooterProps) {
               </li>
               <li>
                 <button
-                  onClick={() => scrollToSection('pricing')}
+                  onClick={() => handleMenuClick('pricing')}
                   className="dark:text-gray-400 text-gray-900 hover:text-teal-heart transition-colors"
                 >
                   Pricing
@@ -113,9 +118,12 @@ export default function Footer({ onNavigate, darkMode }: FooterProps) {
                 </a>
               </li>
               <li>
-                <a href="#" className="dark:text-gray-400 text-gray-900 hover:text-teal-heart transition-colors">
+                <button
+                  onClick={() => handleMenuClick('video-tutorials')}
+                  className="dark:text-gray-400 text-gray-900 hover:text-teal-heart transition-colors"
+                >
                   Video Tutorials
-                </a>
+                </button>
               </li>
             </ul>
           </div>

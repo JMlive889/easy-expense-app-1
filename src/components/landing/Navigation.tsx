@@ -4,9 +4,10 @@ import { Moon, Sun, Menu, X } from 'lucide-react';
 interface NavigationProps {
   darkMode: boolean;
   toggleDarkMode: () => void;
+  onNavigate?: (page: string) => void;
 }
 
-export default function Navigation({ darkMode, toggleDarkMode }: NavigationProps) {
+export default function Navigation({ darkMode, toggleDarkMode, onNavigate }: NavigationProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -18,8 +19,14 @@ export default function Navigation({ darkMode, toggleDarkMode }: NavigationProps
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
+  const handleMenuClick = (id: string) => {
+    if (id === 'video-tutorials' && onNavigate) {
+      onNavigate('video-tutorials');
+      setIsMobileMenuOpen(false);
+      return;
+    }
+
+    const element = document.getElementById(id);
     if (element) {
       const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
@@ -36,6 +43,7 @@ export default function Navigation({ darkMode, toggleDarkMode }: NavigationProps
   const menuItems = [
     { label: 'Home', id: 'home' },
     { label: 'Features', id: 'features' },
+    { label: 'Video Tutorials', id: 'video-tutorials' },
     { label: 'Pricing', id: 'pricing' }
   ];
 
@@ -49,7 +57,7 @@ export default function Navigation({ darkMode, toggleDarkMode }: NavigationProps
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => scrollToSection('home')}>
+          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => handleMenuClick('home')}>
             <img
               src={darkMode ? "/EZ_Logo_-_White.png" : "/EZ_Logo_-_Black.png"}
               alt="Easy Expense App Logo"
@@ -64,7 +72,7 @@ export default function Navigation({ darkMode, toggleDarkMode }: NavigationProps
             {menuItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => handleMenuClick(item.id)}
                 className="text-gray-700 dark:text-gray-300 hover:text-teal-heart dark:hover:text-teal-heart transition-colors font-medium"
               >
                 {item.label}
@@ -116,7 +124,7 @@ export default function Navigation({ darkMode, toggleDarkMode }: NavigationProps
             {menuItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => handleMenuClick(item.id)}
                 className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-teal-heart/10 rounded-lg transition-colors font-medium"
               >
                 {item.label}

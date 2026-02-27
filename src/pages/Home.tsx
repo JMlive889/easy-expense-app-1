@@ -14,7 +14,7 @@ import CTASection from '../components/landing/CTASection';
 import Footer from '../components/landing/Footer';
 
 interface HomeProps {
-  onNavigate?: (page: 'landing') => void;
+  onNavigate?: (page: string) => void;
 }
 
 export default function Home({ onNavigate }: HomeProps) {
@@ -38,7 +38,7 @@ export default function Home({ onNavigate }: HomeProps) {
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-bg-black text-white' : 'bg-white text-gray-900'}`}>
-      <Navigation darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      <Navigation darkMode={darkMode} toggleDarkMode={toggleDarkMode} onNavigate={onNavigate} />
       <StickyBanner darkMode={darkMode} />
       <div id="home">
         <Hero />

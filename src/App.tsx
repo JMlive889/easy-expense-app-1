@@ -25,11 +25,12 @@ import { Reports } from './pages/Reports'
 import { BatchView } from './pages/BatchView'
 import { LicenseDetails } from './pages/LicenseDetails'
 import Home from './pages/Home'
+import VideoTutorials from './pages/VideoTutorials'
 import { MainLayout } from './components/layout/MainLayout'
 import { useAuth } from './contexts/AuthContext'
 import { License, OwnerInfo } from './hooks/useLicenses'
 
-export type PageType = 'landing' | 'dashboard' | 'settings' | 'edit-profile' | 'edit-entity' | 'edit-notifications' | 'pricing' | 'login' | 'signup' | 'success' | 'reset-password' | 'forgot-password' | 'licenses' | 'license-details' | 'accept-invitation' | 'add-accountant' | 'other-settings' | 'documents' | 'receipts' | 'chats' | 'messages' | 'todos' | 'entities' | 'bookmarks' | 'reports' | 'batch-view'
+export type PageType = 'landing' | 'dashboard' | 'settings' | 'edit-profile' | 'edit-entity' | 'edit-notifications' | 'pricing' | 'login' | 'signup' | 'success' | 'reset-password' | 'forgot-password' | 'licenses' | 'license-details' | 'accept-invitation' | 'add-accountant' | 'other-settings' | 'documents' | 'receipts' | 'chats' | 'messages' | 'todos' | 'entities' | 'bookmarks' | 'reports' | 'batch-view' | 'video-tutorials'
 
 function App() {
   const { user, profile, loading } = useAuth()
@@ -87,7 +88,7 @@ function App() {
   useEffect(() => {
     if (loading) return
 
-    const publicPages: PageType[] = ['landing', 'login', 'signup', 'reset-password', 'forgot-password', 'accept-invitation']
+    const publicPages: PageType[] = ['landing', 'login', 'signup', 'reset-password', 'forgot-password', 'accept-invitation', 'video-tutorials']
     const authRequiredPages: PageType[] = ['success', 'pricing']
     const isAuthenticated = user && profile
 
@@ -141,13 +142,15 @@ function App() {
   }
 
   const renderPage = () => {
-    const publicPages: PageType[] = ['landing', 'login', 'signup', 'reset-password', 'forgot-password', 'accept-invitation']
+    const publicPages: PageType[] = ['landing', 'login', 'signup', 'reset-password', 'forgot-password', 'accept-invitation', 'video-tutorials']
     const shouldUseLayout = user && profile && !publicPages.includes(currentPage)
 
     const pageContent = (() => {
       switch (currentPage) {
         case 'landing':
           return <Home onNavigate={handleNavigate} />
+        case 'video-tutorials':
+          return <VideoTutorials onNavigate={handleNavigate} />
         case 'dashboard':
           return <Dashboard onNavigate={handleNavigate} />
         case 'settings':
