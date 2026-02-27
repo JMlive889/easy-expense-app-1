@@ -2,7 +2,11 @@ import { Twitter, Linkedin, Github } from 'lucide-react';
 import { useState } from 'react';
 import FlowingALogo from './FlowingALogo';
 
-export default function Footer() {
+interface FooterProps {
+  onNavigate?: (page: 'landing') => void;
+}
+
+export default function Footer({ onNavigate }: FooterProps) {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
 
@@ -176,9 +180,12 @@ export default function Footer() {
             </a>
           </div>
           <p className="dark:text-gray-400 text-gray-900 text-sm">
-            <a href="https://accountingmodule.com" className="hover:text-teal-heart transition-colors">
+            <button
+              onClick={() => onNavigate?.('landing')}
+              className="hover:text-teal-heart transition-colors"
+            >
               accountingmodule.com
-            </a>
+            </button>
           </p>
         </div>
       </div>

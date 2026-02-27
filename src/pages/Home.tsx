@@ -13,7 +13,11 @@ import PricingSection from '../components/landing/PricingSection';
 import CTASection from '../components/landing/CTASection';
 import Footer from '../components/landing/Footer';
 
-export default function Home() {
+interface HomeProps {
+  onNavigate?: (page: 'landing') => void;
+}
+
+export default function Home({ onNavigate }: HomeProps) {
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('darkMode');
     return saved !== null ? JSON.parse(saved) : true;
@@ -46,7 +50,7 @@ export default function Home() {
       <SocialProof />
       <PricingSection />
       <CTASection />
-      <Footer />
+      <Footer onNavigate={onNavigate} />
     </div>
   );
 }

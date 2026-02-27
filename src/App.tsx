@@ -97,7 +97,7 @@ function App() {
         setCurrentPage('landing')
       } else if (!isAuthenticated && authRequiredPages.includes(currentPage)) {
         setCurrentPage('landing')
-      } else if (isAuthenticated && ['landing', 'login', 'signup'].includes(currentPage)) {
+      } else if (isAuthenticated && ['login', 'signup'].includes(currentPage)) {
         setCurrentPage('dashboard')
       }
       return
@@ -105,7 +105,7 @@ function App() {
 
     if (!isAuthenticated && !publicPages.includes(currentPage) && !authRequiredPages.includes(currentPage)) {
       setCurrentPage('landing')
-    } else if (isAuthenticated && ['landing', 'login', 'signup'].includes(currentPage)) {
+    } else if (isAuthenticated && ['login', 'signup'].includes(currentPage)) {
       setCurrentPage('dashboard')
     }
   }, [user, profile, loading, currentPage])
@@ -147,7 +147,7 @@ function App() {
     const pageContent = (() => {
       switch (currentPage) {
         case 'landing':
-          return <Home />
+          return <Home onNavigate={handleNavigate} />
         case 'dashboard':
           return <Dashboard onNavigate={handleNavigate} />
         case 'settings':
