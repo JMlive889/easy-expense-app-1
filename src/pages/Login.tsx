@@ -5,6 +5,7 @@ import { PageType } from '../App'
 import { Info, AlertCircle, Loader2 } from 'lucide-react'
 import { useInvitation } from '../hooks/useInvitation'
 import Footer from '../components/landing/Footer'
+import Navigation from '../components/landing/Navigation'
 
 interface LoginProps {
   onNavigate: (page: PageType) => void
@@ -30,6 +31,17 @@ export function Login({ onNavigate }: LoginProps) {
       document.documentElement.classList.remove('dark')
     }
   }, [])
+
+  const toggleDarkMode = () => {
+    const newDarkMode = !darkMode
+    setDarkMode(newDarkMode)
+    localStorage.setItem('theme', newDarkMode ? 'dark' : 'light')
+    if (newDarkMode) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -60,17 +72,11 @@ export function Login({ onNavigate }: LoginProps) {
 
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-gray-950">
-      <div className="flex-1 flex items-center justify-center py-12 pb-24 md:pb-80 px-4 sm:px-6 lg:px-8">
+      <Navigation darkMode={darkMode} toggleDarkMode={toggleDarkMode} onNavigate={onNavigate as (page: string) => void} />
+      <div className="flex-1 flex items-center justify-center py-12 pt-28 pb-24 md:pb-80 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div className="text-center">
-            <div className="flex justify-center mb-6">
-              <img
-                src={darkMode ? "/EZ_Logo_-_White.png" : "/EZ_Logo_-_Black.png"}
-                alt="Easy Expense App Logo"
-                className="w-20 h-20 object-contain"
-              />
-            </div>
-          <h2 className="mt-6 text-3xl font-extrabold text-slate-900 dark:text-white">
+          <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white">
             {ownerName && entityName ? (
               <>Sign in to join {ownerName}'s {entityName} workspace</>
             ) : (
