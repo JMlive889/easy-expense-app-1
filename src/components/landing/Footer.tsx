@@ -88,6 +88,14 @@ export default function Footer({ onNavigate, darkMode }: FooterProps) {
                   Pricing
                 </button>
               </li>
+              <li>
+                <a
+                  href="/access-h9k2m7p4"
+                  className="dark:text-gray-400 text-gray-900 hover:text-teal-heart transition-colors"
+                >
+                  Login
+                </a>
+              </li>
             </ul>
           </div>
 

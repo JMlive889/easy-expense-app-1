@@ -36,9 +36,7 @@ export default function Navigation({ darkMode, toggleDarkMode }: NavigationProps
   const menuItems = [
     { label: 'Home', id: 'home' },
     { label: 'Features', id: 'features' },
-    { label: 'Pricing', id: 'pricing' },
-    { label: 'Support', id: 'support' },
-    { label: 'Contact', id: 'contact' }
+    { label: 'Pricing', id: 'pricing' }
   ];
 
   return (
