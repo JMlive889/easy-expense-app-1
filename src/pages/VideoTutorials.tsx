@@ -8,7 +8,10 @@ interface VideoTutorialsProps {
 }
 
 export default function VideoTutorials({ onNavigate }: VideoTutorialsProps = {}) {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem('darkMode');
+    return saved !== null ? JSON.parse(saved) : true;
+  });
 
   useEffect(() => {
     if (darkMode) {
@@ -16,6 +19,7 @@ export default function VideoTutorials({ onNavigate }: VideoTutorialsProps = {})
     } else {
       document.documentElement.classList.remove('dark');
     }
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
   }, [darkMode]);
 
   const toggleDarkMode = () => {

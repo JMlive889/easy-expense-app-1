@@ -20,8 +20,8 @@ export default function Navigation({ darkMode, toggleDarkMode, onNavigate }: Nav
   }, []);
 
   const handleMenuClick = (id: string) => {
-    if (id === 'video-tutorials' && onNavigate) {
-      onNavigate('video-tutorials');
+    if (id === 'video-tutorials') {
+      if (onNavigate) onNavigate('video-tutorials');
       setIsMobileMenuOpen(false);
       return;
     }
@@ -31,11 +31,9 @@ export default function Navigation({ darkMode, toggleDarkMode, onNavigate }: Nav
       const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    } else if (onNavigate) {
+      onNavigate('landing');
     }
     setIsMobileMenuOpen(false);
   };
