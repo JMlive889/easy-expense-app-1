@@ -33,7 +33,7 @@ export default function Footer({ onNavigate, darkMode }: FooterProps) {
           <div>
             <div className="flex items-center space-x-2 mb-6">
               <img
-                src={darkMode ? "/EZ_Logo_(1).png" : "/EZ_Logo.png"}
+                src={darkMode ? "/EZ_Logo_-_White.png" : "/EZ_Logo_-_Black.png"}
                 alt="Easy Expense App Logo"
                 className="w-10 h-10 object-contain"
               />
