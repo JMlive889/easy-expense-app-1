@@ -1,12 +1,12 @@
 import { Twitter, Linkedin, Github } from 'lucide-react';
 import { useState } from 'react';
-import FlowingALogo from './FlowingALogo';
 
 interface FooterProps {
   onNavigate?: (page: 'landing') => void;
+  darkMode?: boolean;
 }
 
-export default function Footer({ onNavigate }: FooterProps) {
+export default function Footer({ onNavigate, darkMode }: FooterProps) {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
 
@@ -32,11 +32,13 @@ export default function Footer({ onNavigate }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
           <div>
             <div className="flex items-center space-x-2 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center p-1.5">
-                <FlowingALogo />
-              </div>
+              <img
+                src={darkMode ? "/EZ_Logo_(1).png" : "/EZ_Logo.png"}
+                alt="Easy Expense App Logo"
+                className="w-10 h-10 object-contain"
+              />
               <span className="text-xl font-bold text-teal-heart">
-                Accounting Module
+                Easy Expense App
               </span>
             </div>
             <p className="text-base dark:text-gray-400 text-gray-900 mb-6 leading-relaxed">
@@ -163,7 +165,7 @@ export default function Footer({ onNavigate }: FooterProps) {
 
         <div className="border-t border-teal-heart/20 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="dark:text-gray-400 text-gray-900 text-sm">
-            &copy; 2026 Accounting Module. All rights reserved.
+            &copy; 2026 Easy Expense App. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-6 text-sm">
             <a href="#" className="dark:text-gray-400 text-gray-900 hover:text-teal-heart transition-colors">
@@ -184,7 +186,7 @@ export default function Footer({ onNavigate }: FooterProps) {
               onClick={() => onNavigate?.('landing')}
               className="hover:text-teal-heart transition-colors"
             >
-              accountingmodule.com
+              easyexpenseapp.com
             </button>
           </p>
         </div>

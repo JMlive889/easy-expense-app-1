@@ -40,17 +40,25 @@ export default function Home({ onNavigate }: HomeProps) {
     <div className={`min-h-screen ${darkMode ? 'bg-bg-black text-white' : 'bg-white text-gray-900'}`}>
       <Navigation darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       <StickyBanner darkMode={darkMode} />
-      <Hero />
+      <div id="home">
+        <Hero />
+      </div>
       <VideoHero />
       <ThreeMainFunctions />
       <FeatureShowcase />
-      <Features />
+      <div id="features">
+        <Features />
+      </div>
       <Differentiation />
       <ComingSoon />
       <SocialProof />
-      <PricingSection />
-      <CTASection />
-      <Footer onNavigate={onNavigate} />
+      <div id="pricing">
+        <PricingSection />
+      </div>
+      <div id="support">
+        <CTASection />
+      </div>
+      <Footer onNavigate={onNavigate} darkMode={darkMode} />
     </div>
   );
 }

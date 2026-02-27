@@ -45,7 +45,7 @@ export default function Differentiation() {
             <span className="dark:text-white text-gray-900">Why Teams Choose</span>
             <br />
             <span className="text-teal-heart">
-              Accounting Module
+              Easy Expense App
             </span>
           </h2>
           <p className="text-xl dark:text-gray-400 text-gray-900 max-w-3xl mx-auto">
