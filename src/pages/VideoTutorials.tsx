@@ -20,6 +20,7 @@ export default function VideoTutorials({ onNavigate }: VideoTutorialsProps = {})
       document.documentElement.classList.remove('dark');
     }
     localStorage.setItem('darkMode', JSON.stringify(darkMode));
+    localStorage.setItem('theme_preference', darkMode ? 'dark' : 'light');
   }, [darkMode]);
 
   const toggleDarkMode = () => {

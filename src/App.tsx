@@ -31,6 +31,7 @@ import { useAuth } from './contexts/AuthContext'
 import { License, OwnerInfo } from './hooks/useLicenses'
 
 export type PageType = 'landing' | 'dashboard' | 'settings' | 'edit-profile' | 'edit-entity' | 'edit-notifications' | 'pricing' | 'login' | 'signup' | 'success' | 'reset-password' | 'forgot-password' | 'licenses' | 'license-details' | 'accept-invitation' | 'add-accountant' | 'other-settings' | 'documents' | 'receipts' | 'chats' | 'messages' | 'todos' | 'entities' | 'bookmarks' | 'reports' | 'batch-view' | 'video-tutorials'
+export type LandingSection = 'home' | 'features' | 'pricing' | 'support'
 
 function App() {
   const { user, profile, loading } = useAuth()
@@ -40,6 +41,7 @@ function App() {
   const [activeChatId, setActiveChatId] = useState<string | null>(null)
   const [selectedLicense, setSelectedLicense] = useState<License | OwnerInfo | null>(null)
   const [isOwnerLicense, setIsOwnerLicense] = useState(false)
+  const [landingScrollTarget, setLandingScrollTarget] = useState<string | null>(null)
   const hasInitializedRef = useRef(false)
 
   useEffect(() => {
@@ -124,9 +126,14 @@ function App() {
     )
   }
 
-  const handleNavigate = (page: PageType, chatId?: string, licenseData?: { license: License | OwnerInfo; isOwner: boolean }) => {
+  const handleNavigate = (page: PageType, chatId?: string, licenseData?: { license: License | OwnerInfo; isOwner: boolean }, scrollTarget?: string) => {
     setPreviousPage(currentPage)
     setCurrentPage(page)
+    if (page === 'landing' && scrollTarget) {
+      setLandingScrollTarget(scrollTarget)
+    } else {
+      setLandingScrollTarget(null)
+    }
     if (chatId) {
       setActiveChatId(chatId)
     } else {
@@ -148,7 +155,7 @@ function App() {
     const pageContent = (() => {
       switch (currentPage) {
         case 'landing':
-          return <Home onNavigate={handleNavigate} />
+          return <Home onNavigate={handleNavigate} scrollTarget={landingScrollTarget} />
         case 'video-tutorials':
           return <VideoTutorials onNavigate={handleNavigate} />
         case 'dashboard':

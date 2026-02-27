@@ -18,11 +18,17 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme_preference') as Theme | null;
-    if (savedTheme) {
-      setTheme(savedTheme);
-      if (savedTheme === 'dark') {
-        document.documentElement.classList.add('dark');
-      }
+    const landingDarkMode = localStorage.getItem('darkMode');
+    const effectiveTheme: Theme = savedTheme
+      ? savedTheme
+      : landingDarkMode !== null
+        ? (JSON.parse(landingDarkMode) ? 'dark' : 'light')
+        : 'dark';
+    setTheme(effectiveTheme);
+    if (effectiveTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
     }
     setIsInitialized(true);
   }, []);
@@ -36,6 +42,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   const applyTheme = (newTheme: Theme) => {
     localStorage.setItem('theme_preference', newTheme);
+    localStorage.setItem('darkMode', JSON.stringify(newTheme === 'dark'));
     if (newTheme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {

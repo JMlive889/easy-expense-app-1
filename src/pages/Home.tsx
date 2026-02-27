@@ -15,9 +15,10 @@ import Footer from '../components/landing/Footer';
 
 interface HomeProps {
   onNavigate?: (page: string) => void;
+  scrollTarget?: string | null;
 }
 
-export default function Home({ onNavigate }: HomeProps) {
+export default function Home({ onNavigate, scrollTarget }: HomeProps) {
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('darkMode');
     return saved !== null ? JSON.parse(saved) : true;
@@ -30,7 +31,24 @@ export default function Home({ onNavigate }: HomeProps) {
       document.documentElement.classList.remove('dark');
     }
     localStorage.setItem('darkMode', JSON.stringify(darkMode));
+    localStorage.setItem('theme_preference', darkMode ? 'dark' : 'light');
   }, [darkMode]);
+
+  useEffect(() => {
+    if (!scrollTarget) return;
+    const attemptScroll = (attemptsLeft: number) => {
+      const element = document.getElementById(scrollTarget);
+      if (element) {
+        const offset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      } else if (attemptsLeft > 0) {
+        setTimeout(() => attemptScroll(attemptsLeft - 1), 100);
+      }
+    };
+    attemptScroll(10);
+  }, [scrollTarget]);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);

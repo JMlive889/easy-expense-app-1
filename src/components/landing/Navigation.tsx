@@ -4,7 +4,7 @@ import { Moon, Sun, Menu, X } from 'lucide-react';
 interface NavigationProps {
   darkMode: boolean;
   toggleDarkMode: () => void;
-  onNavigate?: (page: string) => void;
+  onNavigate?: (page: string, chatId?: string, licenseData?: undefined, scrollTarget?: string) => void;
 }
 
 export default function Navigation({ darkMode, toggleDarkMode, onNavigate }: NavigationProps) {
@@ -33,7 +33,7 @@ export default function Navigation({ darkMode, toggleDarkMode, onNavigate }: Nav
       const offsetPosition = elementPosition + window.pageYOffset - offset;
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     } else if (onNavigate) {
-      onNavigate('landing');
+      onNavigate('landing', undefined, undefined, id);
     }
     setIsMobileMenuOpen(false);
   };

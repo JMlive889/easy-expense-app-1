@@ -37,9 +37,14 @@ export function DesktopFooter() {
             </a>
           </div>
 
-          <div className="text-sm text-gray-600 dark:text-gray-400">
+          <a
+            href="https://www.easyexpenseapp.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+          >
             EasyExpenseApp.com
-          </div>
+          </a>
         </div>
       </div>
     </footer>
