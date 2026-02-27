@@ -170,6 +170,7 @@ export default function GetStarted({ onNavigate }: GetStartedProps) {
   }, [darkMode]);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
     setTimeout(() => emailRef.current?.focus(), 300);
   }, []);
 
@@ -237,7 +238,7 @@ export default function GetStarted({ onNavigate }: GetStartedProps) {
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
               <span className="dark:text-white text-gray-900">Manage your team expenses, and</span>
               <br className="hidden sm:block" />
-              <span className="text-teal-heart"> communicate with your accountant.</span>
+              <span className="text-teal-heart"> Communicate with your accountant.</span>
               <br className="hidden sm:block" />
               <span className="dark:text-white text-gray-900"> All in one app.</span>
             </h1>

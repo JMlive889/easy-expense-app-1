@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Moon, Sun, Menu, X } from 'lucide-react';
+import { Moon, Sun, Menu, X, UserCircle } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface NavigationProps {
   darkMode: boolean;
@@ -8,6 +9,7 @@ interface NavigationProps {
 }
 
 export default function Navigation({ darkMode, toggleDarkMode, onNavigate }: NavigationProps) {
+  const { user, profile } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -88,6 +90,14 @@ export default function Navigation({ darkMode, toggleDarkMode, onNavigate }: Nav
                 <Moon className="w-5 h-5 text-teal-heart" />
               )}
             </button>
+
+            <button
+              onClick={() => onNavigate?.(user && profile ? 'dashboard' : 'login')}
+              className="p-2 rounded-lg bg-teal-heart/10 hover:bg-teal-heart/20 transition-colors"
+              aria-label={user && profile ? 'Go to dashboard' : 'Sign in'}
+            >
+              <UserCircle className="w-5 h-5 text-teal-heart" />
+            </button>
           </div>
 
           <div className="md:hidden flex items-center space-x-2">
@@ -101,6 +111,14 @@ export default function Navigation({ darkMode, toggleDarkMode, onNavigate }: Nav
               ) : (
                 <Moon className="w-5 h-5 text-teal-heart" />
               )}
+            </button>
+
+            <button
+              onClick={() => onNavigate?.(user && profile ? 'dashboard' : 'login')}
+              className="p-2 rounded-lg bg-teal-heart/10 hover:bg-teal-heart/20 transition-colors"
+              aria-label={user && profile ? 'Go to dashboard' : 'Sign in'}
+            >
+              <UserCircle className="w-5 h-5 text-teal-heart" />
             </button>
 
             <button
