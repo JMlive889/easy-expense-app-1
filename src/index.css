@@ -8,3 +8,45 @@
   --safe-area-inset-bottom: env(safe-area-inset-bottom);
   --safe-area-inset-left: env(safe-area-inset-left);
 }
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply antialiased;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #10b981 #0b0a10;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #0b0a10;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: #10b981;
+    border-radius: 4px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: #34d399;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+  }
+
+  .text-glow-lime {
+    text-shadow: 0 0 20px rgba(52, 211, 153, 0.5);
+  }
+}

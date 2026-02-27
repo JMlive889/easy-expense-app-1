@@ -24,16 +24,17 @@ import { Bookmarks } from './pages/Bookmarks'
 import { Reports } from './pages/Reports'
 import { BatchView } from './pages/BatchView'
 import { LicenseDetails } from './pages/LicenseDetails'
+import Home from './pages/Home'
 import { MainLayout } from './components/layout/MainLayout'
 import { useAuth } from './contexts/AuthContext'
 import { License, OwnerInfo } from './hooks/useLicenses'
 
-export type PageType = 'dashboard' | 'settings' | 'edit-profile' | 'edit-entity' | 'edit-notifications' | 'pricing' | 'login' | 'signup' | 'success' | 'reset-password' | 'forgot-password' | 'licenses' | 'license-details' | 'accept-invitation' | 'add-accountant' | 'other-settings' | 'documents' | 'receipts' | 'chats' | 'messages' | 'todos' | 'entities' | 'bookmarks' | 'reports' | 'batch-view'
+export type PageType = 'landing' | 'dashboard' | 'settings' | 'edit-profile' | 'edit-entity' | 'edit-notifications' | 'pricing' | 'login' | 'signup' | 'success' | 'reset-password' | 'forgot-password' | 'licenses' | 'license-details' | 'accept-invitation' | 'add-accountant' | 'other-settings' | 'documents' | 'receipts' | 'chats' | 'messages' | 'todos' | 'entities' | 'bookmarks' | 'reports' | 'batch-view'
 
 function App() {
   const { user, profile, loading } = useAuth()
-  const [currentPage, setCurrentPage] = useState<PageType>('dashboard')
-  const [previousPage, setPreviousPage] = useState<PageType>('dashboard')
+  const [currentPage, setCurrentPage] = useState<PageType>('landing')
+  const [previousPage, setPreviousPage] = useState<PageType>('landing')
   const [invitationToken, setInvitationToken] = useState<string | null>(null)
   const [activeChatId, setActiveChatId] = useState<string | null>(null)
   const [selectedLicense, setSelectedLicense] = useState<License | OwnerInfo | null>(null)
@@ -52,6 +53,13 @@ function App() {
     const type = hashParams.get('type')
     if (type === 'recovery') {
       setCurrentPage('reset-password')
+      return
+    }
+
+    // Check for secure login path
+    const path = window.location.pathname
+    if (path === '/access-h9k2m7p4') {
+      setCurrentPage('login')
       return
     }
 
@@ -79,25 +87,25 @@ function App() {
   useEffect(() => {
     if (loading) return
 
-    const publicPages: PageType[] = ['login', 'signup', 'reset-password', 'forgot-password', 'accept-invitation']
+    const publicPages: PageType[] = ['landing', 'login', 'signup', 'reset-password', 'forgot-password', 'accept-invitation']
     const authRequiredPages: PageType[] = ['success', 'pricing']
     const isAuthenticated = user && profile
 
     if (!hasInitializedRef.current) {
       hasInitializedRef.current = true
       if (!isAuthenticated && !publicPages.includes(currentPage) && !authRequiredPages.includes(currentPage)) {
-        setCurrentPage('login')
+        setCurrentPage('landing')
       } else if (!isAuthenticated && authRequiredPages.includes(currentPage)) {
-        setCurrentPage('login')
-      } else if (isAuthenticated && ['login', 'signup'].includes(currentPage)) {
+        setCurrentPage('landing')
+      } else if (isAuthenticated && ['landing', 'login', 'signup'].includes(currentPage)) {
         setCurrentPage('dashboard')
       }
       return
     }
 
     if (!isAuthenticated && !publicPages.includes(currentPage) && !authRequiredPages.includes(currentPage)) {
-      setCurrentPage('login')
-    } else if (isAuthenticated && ['login', 'signup'].includes(currentPage)) {
+      setCurrentPage('landing')
+    } else if (isAuthenticated && ['landing', 'login', 'signup'].includes(currentPage)) {
       setCurrentPage('dashboard')
     }
   }, [user, profile, loading, currentPage])
@@ -133,11 +141,13 @@ function App() {
   }
 
   const renderPage = () => {
-    const publicPages: PageType[] = ['login', 'signup', 'reset-password', 'forgot-password', 'accept-invitation']
+    const publicPages: PageType[] = ['landing', 'login', 'signup', 'reset-password', 'forgot-password', 'accept-invitation']
     const shouldUseLayout = user && profile && !publicPages.includes(currentPage)
 
     const pageContent = (() => {
       switch (currentPage) {
+        case 'landing':
+          return <Home />
         case 'dashboard':
           return <Dashboard onNavigate={handleNavigate} />
         case 'settings':
@@ -201,7 +211,7 @@ function App() {
         case 'forgot-password':
           return <ForgotPassword onNavigate={handleNavigate} />
         default:
-          return <Dashboard onNavigate={handleNavigate} />
+          return <Home />
       }
     })()
 

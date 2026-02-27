@@ -1,0 +1,11 @@
+SECURE LOGIN URL
+=================
+
+Your login page has been moved to a non-guessable path for security.
+
+Login URL: https://easyexpenseapp.com/access-h9k2m7p4
+
+This URL is not linked from the landing page and should only be shared with
+authorized users who need to access the application.
+
+Keep this URL secure and private.
