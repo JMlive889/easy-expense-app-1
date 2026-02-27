@@ -136,7 +136,7 @@ export default function Navigation({ darkMode, toggleDarkMode, onNavigate }: Nav
         </div>
 
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 space-y-2 border-t border-teal-heart/20">
+          <div className="md:hidden py-4 space-y-2 border-t border-teal-heart/20 bg-white dark:bg-gray-950 shadow-lg">
             {menuItems.map((item) => (
               <button
                 key={item.id}
