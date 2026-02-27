@@ -75,7 +75,7 @@ export default function StickyBanner({ darkMode }: StickyBannerProps) {
                 </h3>
                 <p
                   className={`text-base truncate ${
-                    darkMode ? 'text-gray-400' : 'text-gray-900'
+                    darkMode ? 'text-gray-400' : 'text-gray-600'
                   }`}
                 >
                   AI-powered accounting made simple
