@@ -62,7 +62,7 @@ export function AppHeader({
         >
           <div className="flex items-center gap-3">
             <img
-              src={darkMode ? "/EZ_Logo_(1).png" : "/EZ_Logo.png"}
+              src={darkMode ? "/EZ_Logo.png" : "/EZ_Logo_(1).png"}
               alt="Easy Expense App Logo"
               className="w-8 h-8 object-contain"
             />
