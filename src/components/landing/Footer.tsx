@@ -1,6 +1,5 @@
 import { Twitter, Linkedin, Github } from 'lucide-react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import FlowingALogo from './FlowingALogo';
 
 export default function Footer() {
@@ -115,9 +114,9 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <Link to="/video-tutorials" className="dark:text-gray-400 text-gray-900 hover:text-teal-heart transition-colors">
+                <a href="#" className="dark:text-gray-400 text-gray-900 hover:text-teal-heart transition-colors">
                   Video Tutorials
-                </Link>
+                </a>
               </li>
               <li>
                 <a href="#" className="dark:text-gray-400 text-gray-900 hover:text-teal-heart transition-colors">
