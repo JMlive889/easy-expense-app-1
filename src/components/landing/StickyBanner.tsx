@@ -58,8 +58,8 @@ export default function StickyBanner({ darkMode }: StickyBannerProps) {
               <div className="flex-shrink-0">
                 <div className="w-16 h-16 rounded-lg overflow-hidden bg-teal-heart/10 border border-teal-heart/30">
                   <img
-                    src="/screenshot_2026-01-30_at_8.54.02_pm.png"
-                    alt="Preview thumbnail"
+                    src="/Dashboard.jpg"
+                    alt="Dashboard preview"
                     className="w-full h-full object-cover"
                   />
                 </div>
