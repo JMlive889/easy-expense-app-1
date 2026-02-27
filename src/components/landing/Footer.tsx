@@ -88,21 +88,6 @@ export default function Footer({ onNavigate, darkMode }: FooterProps) {
                   Pricing
                 </button>
               </li>
-              <li>
-                <a href="#" className="dark:text-gray-400 text-gray-900 hover:text-teal-heart transition-colors">
-                  Integrations
-                </a>
-              </li>
-              <li>
-                <a href="#" className="dark:text-gray-400 text-gray-900 hover:text-teal-heart transition-colors">
-                  API Documentation
-                </a>
-              </li>
-              <li>
-                <a href="#" className="dark:text-gray-400 text-gray-900 hover:text-teal-heart transition-colors">
-                  Changelog
-                </a>
-              </li>
             </ul>
           </div>
 
@@ -111,7 +96,7 @@ export default function Footer({ onNavigate, darkMode }: FooterProps) {
             <ul className="space-y-3">
               <li>
                 <a href="#" className="dark:text-gray-400 text-gray-900 hover:text-teal-heart transition-colors">
-                  Help Center
+                  FAQ
                 </a>
               </li>
               <li>
@@ -122,16 +107,6 @@ export default function Footer({ onNavigate, darkMode }: FooterProps) {
               <li>
                 <a href="#" className="dark:text-gray-400 text-gray-900 hover:text-teal-heart transition-colors">
                   Video Tutorials
-                </a>
-              </li>
-              <li>
-                <a href="#" className="dark:text-gray-400 text-gray-900 hover:text-teal-heart transition-colors">
-                  Community Forum
-                </a>
-              </li>
-              <li>
-                <a href="#" className="dark:text-gray-400 text-gray-900 hover:text-teal-heart transition-colors">
-                  Status Page
                 </a>
               </li>
             </ul>

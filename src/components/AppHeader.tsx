@@ -4,6 +4,7 @@ import { PageType } from '../App'
 import HamburgerMenu from './HamburgerMenu'
 import { useAuth } from '../contexts/AuthContext'
 import { getEntityLogo } from '../lib/entityLogo'
+import { useTheme } from '../contexts/ThemeContext'
 
 interface AppHeaderProps {
   pageTitle: string
@@ -27,6 +28,7 @@ export function AppHeader({
   headerVisible = true
 }: AppHeaderProps) {
   const { entity } = useAuth();
+  const { darkMode } = useTheme();
   const [entityLogoUrl, setEntityLogoUrl] = React.useState<string | null>(null);
 
   React.useEffect(() => {
@@ -58,9 +60,16 @@ export function AppHeader({
           className="bg-[#2D9F84] flex items-center justify-between px-4 py-3 transition-all duration-300"
           style={{ paddingTop: 'calc(0.75rem + var(--safe-area-inset-top))' }}
         >
-          <h1 className="text-2xl font-black text-white tracking-wide">
-            Easy Expense App
-          </h1>
+          <div className="flex items-center gap-3">
+            <img
+              src={darkMode ? "/EZ_Logo_(1).png" : "/EZ_Logo.png"}
+              alt="Easy Expense App Logo"
+              className="w-8 h-8 object-contain"
+            />
+            <h1 className="text-2xl font-black text-white tracking-wide">
+              Easy Expense App
+            </h1>
+          </div>
           <div className="flex justify-end">
             {entity && (
               <button
